@@ -3,9 +3,9 @@ services:
   library-frontend:
     build: .
     image: library-image:v1
-    container_name: library-frontend-cont
+    container_name: library-webapp
     environment:
-      - MONGODB_URI=mongodb://library-mongo:27017/libraryDB
+      - MONGODB_URI=mongodb://library-db:27017/libraryDB
       - DB_NAME=libraryDB
     ports:
       - "3005:3000"
@@ -14,7 +14,7 @@ services:
 
   library-backend:
     image: mongo:latest
-    container_name: library-mongo
+    container_name: library-db
     ports:
       - "27018:27017"
     volumes:
