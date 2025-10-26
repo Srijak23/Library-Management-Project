@@ -5,7 +5,7 @@ services:
     image: library-image:v1
     container_name: library-webapp
     environment:
-      - MONGODB_URI=mongodb://library-db:27017/libraryDB
+      - MONGO_URI=mongodb://library-db:27017/libraryDB
       - DB_NAME=libraryDB
     ports:
       - "3005:3000"
