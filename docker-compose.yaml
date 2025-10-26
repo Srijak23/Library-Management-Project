@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  library-frontend:
+    build: .
+    image: library-image:v1
+    container_name: library-frontend-cont
+    environment:
+      - MONGODB_URI=mongodb://library-mongo:27017/libraryDB
+      - DB_NAME=libraryDB
+    ports:
+      - "3002:3000"
+    depends_on:
+      - library-backend
+
+  library-backend:
+    image: mongo:latest
+    container_name: library-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      -./data:/data/db
+      
+
+  
+
+    
