@@ -3,12 +3,10 @@ kind: Ingress
 metadata:
   name: library-ingress
   namespace: library-namespace
-  annotations:
-    kubernetes.io/ingress.class: alb
 spec:
+  ingressClassName: nginx
   rules:
-
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -16,4 +14,4 @@ spec:
           service:
             name: library-service
             port:
-              number: 80
+              number: 3000
