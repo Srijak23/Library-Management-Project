@@ -1,30 +1,21 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  library-frontend:
-    build: ./frontend
-    image: library-frontend:v1
-    container_name: library-webapp
-    environment:
-      - MONGO_URI=mongodb://library-backend:27017/libraryDB
-      - DB_NAME=libraryDB
-    ports:
-      - "3005:3000"
-    depends_on:
-      - library-backend
-
-  library-backend:
-    build: ./backend
-    image: library-backend:v1
-    container_name: library-backend
+  library-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: library-app:v1
+    container_name: library-app
     environment:
       - MONGO_URI=mongodb://library-db:27017/libraryDB
       - DB_NAME=libraryDB
-      - PORT=3001
+      - PORT=3000
     ports:
-      - "3001:3001"
+      - "3000:3000"
     depends_on:
       - library-db
+    restart: always
 
   library-db:
     image: mongo:latest
@@ -33,3 +24,4 @@ services:
       - "27018:27017"
     volumes:
       - ./data:/data/db
+    restart: always
